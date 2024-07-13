@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const quoteText = document.getElementById('quote');
     const authorText = document.getElementById('author');
     const newQuoteButton = document.getElementById('new-quote');
+    const shareQuoteButton = document.getElementById('share-quote');
     
     async function getQuotes() {
         try {
@@ -32,6 +33,14 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 
-    newQuoteButton.addEventListener('click', displayRandomQuote);
-});
+    function shareQuote() {
+        const quote = quoteText.textContent;
+        const author = authorText.textContent;
+        const tweetText = `${quote} ${author}`;
+        const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(tweetText)}`;
+        window.open(twitterUrl, '_blank');
+    }
 
+    newQuoteButton.addEventListener('click', displayRandomQuote);
+    shareQuoteButton.addEventListener('click', shareQuote);
+});
